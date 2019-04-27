@@ -1,32 +1,44 @@
-let button;
-let chooseColor;
-let sound;
-let c;
+var button;
+var chooseColor;
+var sound;
+var c;
+var strokew;
 
 function preload(){
-    sound = loadSound(`pop.mp3`);
+    sound = loadSound('pop.mp3');
 }
 
 function setup() {
-    let myCanvas = createCanvas(500, 500);
-    myCanvas.parent(`sketch`);
+    var myCanvas = createCanvas(640, 500);
+    myCanvas.parent('sketch');
     background(255);
 	//c = color('#FFB2B2');
 
-    button = createButton(`Save`);
-    button.position(550,665);
-    button.parent(`sketch`);
+    button = createButton('Save');
+    button.position(550,695);
+    button.parent('sketch');
     button.mousePressed(saveCanvas);
 
-    button = createButton(`Reset`);
-    button.position(145,665);
-    button.parent(`sketch`);
+    strokew = 5;
+
+    strokeWeight(strokew);
+    input = createInput().attribute('placeholder','Stroke Size');
+    input.position(160, 695);
+
+    button = createButton('Enter');
+    button.position(input.x + input.width+5, 695);
+    button.mousePressed(changeStroke);
+
+    button = createButton('Reset');
+    button.position(500,695);
+    button.parent('sketch');
     button.mousePressed(resetSketch);
 
-    chooseColor = createColorPicker(`#FFB2B2`);
-    chooseColor.position(80,660);
+    chooseColor = createColorPicker('#FFB2B2');
+    chooseColor.position(80,690);
     c = chooseColor.color();
     chooseColor.input(changeColor);
+
  	/*
  	button = createButton('Change Color');
  	button.position(80,665);
@@ -54,16 +66,19 @@ function changeColor(){
 	//c = color(random(255), random(255), random(255));
     c = chooseColor.color();
 }
+function changeStroke(){
+    strokew = input.value();
+}
 
 function mouseDragged() 
 { 
-    strokeWeight(5);
+    strokeWeight(strokew);
     stroke(c);
     line(mouseX, mouseY, pmouseX, pmouseY);
 }
 
 function mouseClicked(){
-    if ((mouseX >= 0) && (mouseX < (500)) &&
+    if ((mouseX >= 0) && (mouseX < (640)) &&
         (mouseY >= 0) && (mouseY < (500))) {
         sound.play();
         } 
@@ -82,7 +97,7 @@ function keyPressed()
 }
 
 function saveCanvas(){
-    save(`drawing.png`);
+    save('drawing.png');
 }
 
 function resetSketch(){
