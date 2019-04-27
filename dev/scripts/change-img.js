@@ -1,6 +1,6 @@
 $(document).ready(function(){
    $(".artworks").change(function(){
-     $("img[name=image-swap]").attr("src",$(this).val());
+     $("img[id=image-swap]").attr("src",$(this).val());
 
    });
 

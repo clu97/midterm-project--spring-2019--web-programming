@@ -59,10 +59,10 @@ let compressImages = () => {
     // Read about the double-star glob pattern at
     // https://gulpjs.com/docs/en/getting-started/explaining-globs#special-character-double-star
     return src([
-        `uncompressed-images/**/*.png`,
-        `uncompressed-images/**/*.jpg`,
-        `uncompressed-images/**/*.svg`,
-        `uncompressed-images/**/*.gif`
+        `dev/imgs/**/*.png`,
+        `dev/imgs/**/*.jpg`,
+        `dev/imgs/**/*.svg`,
+        `dev/imgs/**/*.gif`
     ])
         .pipe(cache(
             imageCompressor({
@@ -72,7 +72,7 @@ let compressImages = () => {
                 interlaced: false     // For GIF files. Set to true for compression.
             })
         ))
-        .pipe(dest(`prod/compressed-images`));
+        .pipe(dest(`prod/imgs`));
 };
 
 const sass = require(`gulp-sass`);
@@ -83,7 +83,7 @@ let compileCSSForDev = () => {
             outputStyle: `expanded`,
             precision: 10
         }).on(`error`, sass.logError))
-        .pipe(dest(`dev/css/uncompressed-css`));
+        .pipe(dest(`dev/css`));
 };
 let compileCSSForProd = () => {
     return src(`dev/css/main.scss`)
@@ -91,7 +91,7 @@ let compileCSSForProd = () => {
             outputStyle: `compressed`,
             precision: 10
         }).on(`error`, sass.logError))
-        .pipe(dest(`prod/css/uncompressed-css`));
+        .pipe(dest(`prod/css`));
 };
 
 const htmlValidator = require(`gulp-html`);
@@ -113,6 +113,7 @@ exports.validateHTML = validateHTML;
 exports.transpileJSForDev = transpileJSForDev;
 exports.lintJS = lintJS;
 exports.compressJS = compressJS;
+exports.compressImages = compressImages;
 exports.compileCSSForDev = compileCSSForDev;
 exports.compileCSSForProd = compileCSSForProd;
 exports.default = series(serve,compileCSSForDev);

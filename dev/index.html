@@ -13,7 +13,9 @@
   crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/uncompressed-css/main.css">
+
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
 	<script src="scripts/sketch.js"></script>
   <script src="scripts/change-img.js"></script>
   <script src="scripts/hoverplay.js"></script>
@@ -23,9 +25,11 @@
 
 <body>
   <h1>SketchPad</h1>
-  <p><span class="sound"><i>Go Crazy AAAaaaAaAaaaaAAa. Go stupid AAAaaaAaAaaaaAAa.</i></span> With the drawings you're about to create with this mini sketchpad. <span class="notice">Feel free to select an image on the right side to draw.</span><audio id="gocrazy">
-    <source src="gocrazy.mp3" type="audio/mpeg"></source>
-</audio></p>
+  <p><span class="sound"><i>Go Crazy AAAaaaAaAaaaaAAa. Go stupid AAAaaaAaAaaaaAAa.</i></span> With the drawings you're about to create with this mini sketchpad. <span class="notice">Feel free to select an image on the right side to draw.</span>
+    <audio id="gocrazy">
+      <source src="gocrazy.mp3" type="audio/mpeg"></source>
+    </audio>
+  </p>
   <div id="wrapsketch">
     <div id="sketch"></div>
     <span class="note">Press 'E' if you would like to erase</span>
@@ -44,16 +48,16 @@
 
 
 </select>
-    <img src="imgs/rosec.png" name="image-swap" alt="rose"/>
+    <img src="imgs/rosec.png" id="image-swap" alt="rose"/>
 
     
    
   </div>
 
-  <img src="imgs/red.png" style="position:fixed;top:10%;em;right:10%;width:10%;z-index:-999">
-  <img src="imgs/yellow.png" style="position:fixed;top:1em;left:25%;width:15%;z-index:-999">
-  <img src="imgs/green.png" style="position:fixed;bottom:20%;left:-2%;width:15%;z-index:-999">
-  <img src="imgs/blue.png" style="position:fixed;bottom:0%;right:40%;width:15%;z-index:-999">
+  <img src="imgs/red.png" alt="bgstrokes" style="position:fixed;top:10%;em;right:10%;width:10%;z-index:-999">
+  <img src="imgs/yellow.png" alt="bgstrokes" style="position:fixed;top:1em;left:25%;width:15%;z-index:-999">
+  <img src="imgs/green.png" alt="bgstrokes" style="position:fixed;bottom:20%;left:-2%;width:15%;z-index:-999">
+  <img src="imgs/blue.png" alt="bgstrokes" style="position:fixed;bottom:0%;right:40%;width:15%;z-index:-999">
 
 
 
