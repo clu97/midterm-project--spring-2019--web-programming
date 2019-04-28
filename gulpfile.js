@@ -6,7 +6,7 @@ const reload = browserSync.reload;
 let serve = () => {
     browserSync({
         notify: true,
-        reloadDelay: 0, // A delay is sometimes helpful when reloading at the
+        reloadDelay: 100, // A delay is sometimes helpful when reloading at the
         server: {       // end of a series of tasks.
             baseDir: [
                 `temp`,

@@ -15,7 +15,7 @@ function setup() {
 	//c = color('#FFB2B2');
 
     button = createButton('Save');
-    button.position(550,695);
+    button.position(myCanvas.width+60,695);
     button.parent('sketch');
     button.mousePressed(saveCanvas);
 
@@ -30,7 +30,7 @@ function setup() {
     button.mousePressed(changeStroke);
 
     button = createButton('Reset');
-    button.position(500,695);
+    button.position(myCanvas.width+10,695);
     button.parent('sketch');
     button.mousePressed(resetSketch);
 
