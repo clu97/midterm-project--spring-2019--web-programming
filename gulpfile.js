@@ -9,8 +9,9 @@ let serve = () => {
         reloadDelay: 100, // A delay is sometimes helpful when reloading at the
         server: {       // end of a series of tasks.
             baseDir: [
-                `temp`,
-                `dev`
+                `dev`,
+                `dev/css`,
+                `dev/scripts`
             ]
         }
     });
@@ -20,12 +21,11 @@ let serve = () => {
         ).on(`change`, reload);
 
     //watch(`dev/**/*.scss`).on(`change`, reload);
-
-    watch(`dev/**/*.scss`,
+    watch(`dev/css/*.scss`,
             series(compileCSSForDev)
         ).on(`change`, reload);
-    watch(`dev/**/*.js`
-        //,series(lintJS)
+    watch(`dev/scripts/*.js`
+        ,series(transpileJSForDev)
         ).on(`change`, reload);
 };
 
@@ -37,11 +37,11 @@ let compressHTML = () => {
         .pipe(dest(`prod`));
 }
 
-const jsCompressor = require(`gulp-uglify`);
+const jsCompressor = require(`gulp-uglify-es`).default;
 const babel = require(`gulp-babel`);
 
 let compressJS = () => {
-    return src(`dev/scripts/*.js`)
+    return src(`dev/scripts/transpiled/*.js`)
         .pipe(babel())
         .pipe(jsCompressor())
         .pipe(dest(`prod/scripts`));
@@ -49,7 +49,7 @@ let compressJS = () => {
 let transpileJSForDev = () => {
     return src(`dev/scripts/*.js`)
         .pipe(babel())
-        .pipe(dest(`temp/scripts`));
+        .pipe(dest(`dev/scripts/transpiled`));
 };
 
 const cache = require(`gulp-cache`);
@@ -100,6 +100,7 @@ let validateHTML = () => {
     return src(`dev/*.html`)
         .pipe(htmlValidator());
 };
+/*
 const jsLinter = require(`gulp-eslint`);
 
 let lintJS = () => {
@@ -107,14 +108,15 @@ let lintJS = () => {
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`, process.stderr));
 };
+*/
 
 exports.serve = serve;
 exports.validateHTML = validateHTML;
 exports.transpileJSForDev = transpileJSForDev;
-exports.lintJS = lintJS;
+//exports.lintJS = lintJS;
 exports.compressJS = compressJS;
 exports.compressImages = compressImages;
 exports.compileCSSForDev = compileCSSForDev;
 exports.compileCSSForProd = compileCSSForProd;
-exports.default = series(serve,compileCSSForDev);
+exports.default = series(serve, compileCSSForDev, transpileJSForDev, validateHTML);
 exports.build = series(compressHTML, compileCSSForProd, compressImages, compressJS);
